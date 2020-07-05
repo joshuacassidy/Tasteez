@@ -1,6 +1,6 @@
 aniso8601==3.0.2
 appnope==0.1.0
-bleach==2.0.0
+bleach==3.1.4
 certifi==2018.8.24
 chardet==3.0.4
 click==6.7
