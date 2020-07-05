@@ -1,0 +1,72 @@
+.navbar {
+  display: flex;
+  position: fixed;
+  flex-direction: row;
+  left: 0;
+  bottom: 0;
+  z-index: 1;
+  background-color: $sidebar-bg-color;
+  color: $sidebar-color;
+  top: auto;
+  width: 100%;
+
+  @media screen and (min-width: 700px) {
+    top: $navbar-height;
+    bottom: 0;
+    width: auto;
+    flex-direction: column;
+  }
+}
+
+.navbar__link {
+  box-sizing: content-box;
+  text-align: center;
+  transition: .3s;
+  color: white;
+  text-decoration: none;
+  border-bottom: 1px solid darken($sidebar-color, 10%);
+  display: inline-block;
+  width: 20%;
+  font-size: .8em;
+  padding: 1em .7em;
+
+  .fas {
+    width: 1.125em;
+    display: block;
+    text-align: center;
+    margin: 0 auto;
+    background-color: $primary-color;
+    border-radius: 60px;
+    box-shadow: 0px 0px 2px #888;
+    padding: 0.5em 0.5em;
+
+    @media screen and (min-width: 700px) {
+      margin-bottom: 7px;
+    }
+  }
+
+  span {
+    display: none;
+    @media screen and (min-width: 700px) {
+      display: inline;
+    }
+  }
+
+  &:hover {
+    background-color: darken($sidebar-color, 10%);
+  }
+
+  @media screen and (min-width: 700px) {
+    padding: 1.5em 1em;
+    display: block;
+    width: auto;
+    font-size: 1em;
+  }
+
+  span {
+    display: none;
+    @media screen and (min-width: 700px) {
+      display: inline;
+    }
+  }
+}

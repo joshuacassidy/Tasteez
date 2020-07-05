@@ -1,0 +1,46 @@
+{% set title = 'Sign In' %}
+
+{% extends './templates/nosidebar.twig' %}
+
+{% block main %}
+    <h2 class="title">Sign In</h2>
+
+    {% if error is defined %}
+    <div class="message message--error">
+      <p class="message__content">
+        {{ error }}
+      </p>
+    </div>
+    {% endif %}
+
+    {% if successfullLogin is defined %}
+
+      <div class="message message--success">
+        <p class="message__content">
+          Logged in
+        </p>
+      </div>
+
+    {% else %}
+
+      <form class="form" action="/auth/login" method="post">
+        <div class="input">
+          <span class="input__icon">
+            <i class="fas fa-envelope"></i>
+          </span>
+          <input placeholder="Email" class="input__input" type="text" name="email" value="">
+        </div>
+
+        <div class="input">
+          <span class="input__icon">
+            <i class="fas fa-lock"></i>
+          </span>
+          <input placeholder="Password" type="password" class="input__input" type="text" name="password" value="">
+        </div>
+
+        <button class="button" type="submit" name=""> Submit</button>
+      </form>
+
+    {% endif %}
+
+{% endblock %}

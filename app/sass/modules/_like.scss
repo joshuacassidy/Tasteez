@@ -1,0 +1,23 @@
+.like {
+  display: inline-block;
+
+  &__button {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: white;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    & .liked {
+      color: $primary-color;
+    }
+
+    & .disliked {
+      color: #d63031;
+    }
+  }
+
+}

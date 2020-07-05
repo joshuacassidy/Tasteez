@@ -1,0 +1,12 @@
+<ul class="media-list">
+{% for category in categories %}
+  <li class="media-list__item">
+    <a href="/meals/category/{{ category.category }}" class="category">
+      <img src="{{ category.image }}" alt="Meal" class="category__thumbnail">
+      <div class="category__footer">
+        {{ category.category }} Dishes
+      </div>
+    </a>
+  </li>
+{% endfor %}
+</ul>

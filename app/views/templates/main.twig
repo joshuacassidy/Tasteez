@@ -1,0 +1,10 @@
+{% extends '/templates/default.twig' %}
+
+{% block content %}
+  {% include '/partials/header.twig'%}
+  {% include '/partials/sidebar.twig' %}
+  <main class="main-content">
+    {% block main %}{% endblock %}
+  </main>
+
+{% endblock %}

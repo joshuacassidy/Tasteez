@@ -1,0 +1,233 @@
+{% set title = 'Recipe' %}
+
+{% extends './templates/main.twig' %}
+
+{% block main %}
+   <section>
+      <div class="masthead">
+        <h2 class="masthead__title">{{ meal.name }}</h2>
+        <div class="masthead__img" style="background-image: url('{{ meal.thumbnail }}')">
+        </div>
+        <div class="masthead__footer">
+
+          <div class="u-float-left">
+
+            <form title="Like Meal" class="like" action="/meal/{{ meal.id }}/like" method="post">
+              <input type="hidden" name="like_value" value="1">
+              <button class="like__button" type="submit" name="button">
+                <i class="fas fa-thumbs-up {% if meal.likes.mealLiked == 1 %}liked{% endif %}"></i>
+              </button>
+              <span class="like__total">{{ meal.likes.totalLikes}}</span>
+            </form>
+
+            <form title="Dislike Meal" class="like" action="/meal/{{ meal.id }}/dislike" method="post">
+              <input type="hidden" name="like_value" value="-1">
+              <button class="like__button" type="submit" name="button">
+                <i class="fas fa-thumbs-down {% if meal.likes.mealLiked == -1 %}disliked{% endif %}"></i>
+              </button>
+              <span class="like__total">{{ meal.likes.totalDislikes}}</span>
+            </form>
+
+          </div>
+          <div class="u-float-right">
+            <form class="favourite" action="/meal/{{ meal.id }}/add-favourite" method="post">
+              <input type="hidden" name="meal_id" value="{{ meal.id }}">
+              <button class="favourite__button" type="submit" name="button">
+                <i class="favourite__icon {% if meal.isFavourite %} isFavourite {% endif %} fas fa-heart"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="grid">
+        <div class="grid__col grid__col--2-of-3">
+          <div class="box">
+            <h2 class="title">Directions</h2>
+            <ul class="directions">
+              <li class="u-table">
+                <span class="u-table-cell">
+                  {{ meal.instructions }}
+                </span>  
+              </li>
+            </ul>
+          </div>
+          <div class="box">
+            <h2 class="title">Comments</h2>
+            <div class="add-comment__form" >
+              <input type="hidden" name="meal_id" value="{{ meal.id }}">
+              <textarea class="add-comment__input" name="comment" id="comment-message"></textarea>
+              
+
+              {% if loggedIn == true %}
+                <input 
+                  class="button add-comment__submit" 
+                  type="submit" 
+                  name="" 
+                  onclick="addComment({{ meal.id }})" 
+                  value="Leave Comment"
+                >
+              {% else %}
+                <button class="button add-comment__submit" onclick="location.href='/auth/login'"> Leave Comment </button>
+              {% endif %}
+
+              <input class="meal-id" type="hidden" name="meal-id" value="{{ meal.id }}">
+            </div>
+
+            <div class="comments" id="comments">
+              {% for comment in meal.comments %}
+              <div class="comment">
+                <div class="comment__header">
+                  <span class="comment__icon comment__icon--user">
+                    <i class="fas fa-user"></i>
+                  </span>
+                  <span class="comment__username">{{ comment.username }}</span>
+                  <span class="comment__date">{{ comment.shortDate }}</span>
+                </div>
+                <div class="comment__body">
+                  {{ comment.comment}}
+                </div>
+                {% if comment.usersComment %}
+                <div action="/meal/{{ meal.id }}/delete-comment" method="POST" onclick="deleteComment({{ comment.comment_id }})">
+                  <input type="hidden" name="meal_id" value="{{ meal.id }}">
+                  <input type="hidden" name="comment_id" value="{{ comment.comment_id }}">
+                  <button
+                    type="submit"
+                    data-comment-id="{{ comment.comment_id }}"
+                    data-meal-id="{{ meal.id }}"
+                    title="Delete Comment"
+                    class="comment__button" href="/meals/favourites">
+                    <i class="fas fa-trash"></i>
+                  </button>
+                </div>
+                {% endif %}
+              </div>
+              {% endfor %}
+
+            </div>
+          </div>
+        </div>
+        <div class="grid__col grid__col--1-of-3">
+          <div class="box">
+            <h2 class="title">Ingredients</h2>
+            {% for ingredient in meal.ingredients %}
+
+              <label class="checkbox" for="ingredient-{{ loop.index }}">
+                <input id="ingredient-{{ loop.index }}" type="checkbox" name="" value="">
+                <p>{{ ingredient.name }}</p>
+              </label>
+
+            {% endfor %}
+
+          </div>
+        </div>
+      </div>
+      </section>
+
+      <script>
+      function addComment() {
+        var message = document.getElementById("comment-message");
+        console.log({{ meal.id }});
+        console.log({{ meal.userID }});
+        
+        var url = '/api/meal/' + {{ meal.id }} + '/add-comment';
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", url, true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.onreadystatechange = function() {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+            var res = JSON.parse(xhr.responseText);
+            console.log(res);
+            var allComments = ""
+            for(var i = 0; i < res.comments.length; i++) {
+                allComments+= '<div class="comment">' +
+                                 '<div class="comment__header">' + 
+                                    '<span class="comment__icon comment__icon--user">' +
+                                      '<i class="fas fa-user"></i>' +
+                                    '</span>' +
+                                    '<span class="comment__username">' + res.comments[i].username + '</span>' + '<span class="comment__date">'
+                                      + res.comments[i].shortDate + 
+                                    '</span>' + 
+                                  '</div>' + 
+                                  '<div class="comment__body">' + res.comments[i].comment + '</div>'
+              if (res.comments[i].user_id == {{ meal.userID }}) {
+                allComments+=
+                '<div onclick="deleteComment(' + res.comments[i].comment_id +')">' + 
+                  '<input type="hidden" name="meal_id" value="{{ meal.id }}">' +
+                  '<input type="hidden" name="comment_id" value="{{ comment.comment_id }}">' +
+                  '<button ' +
+                    'type="submit"' +
+                    'data-comment-id="{{ comment.comment_id }}"' +
+                    'data-meal-id="{{ meal.id }}"' +
+                    'title="Delete Comment"' +
+                    'class="comment__button" href="/meals/favourites">' +
+                    '<i class="fas fa-trash"></i>' +
+                  '</button>' +
+                '</div>'
+                
+              }
+              allComments+='</div>'
+            }
+
+            document.getElementById("comments").innerHTML = allComments
+            message.value = "";
+          }
+      };
+
+        var data = JSON.stringify({ comment: message.value, meal_id: {{ meal.id }} });
+        xhr.send(data);
+
+      }
+
+      function deleteComment(id) {
+        var url = '/api/meal/' + {{ meal.id }} + '/delete-comment';
+        
+        var xhr = new XMLHttpRequest();
+        xhr.open("DELETE", url, true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                var res = JSON.parse(xhr.responseText);
+                console.log(res.comments);
+                var allComments = ""
+
+                for(var i = 0; i < res.comments.length; i++) {
+                    allComments+= '<div class="comment">' +
+                                    '<div class="comment__header">' + 
+                                        '<span class="comment__icon comment__icon--user">' +
+                                          '<i class="fas fa-user"></i>' +
+                                        '</span>' +
+                                        '<span class="comment__username">' + res.comments[i].username + '</span>' + '<span class="comment__date">'
+                                          + res.comments[i].shortDate + 
+                                        '</span>' + 
+                                      '</div>' + 
+                                      '<div class="comment__body">' + res.comments[i].comment + '</div>'
+                  if (res.comments[i].user_id == {{ meal.userID }}) {
+                    allComments+=
+                    '<div onclick="deleteComment(' + res.comments[i].comment_id +')">' + 
+                      '<input type="hidden" name="meal_id" value="{{ meal.id }}">' +
+                      '<input type="hidden" name="comment_id" value="{{ comment.comment_id }}">' +
+                      '<button ' +
+                        'type="submit"' +
+                        'data-comment-id="{{ comment.comment_id }}"' +
+                        'data-meal-id="{{ meal.id }}"' +
+                        'title="Delete Comment"' +
+                        'class="comment__button" href="/meals/favourites">' +
+                        '<i class="fas fa-trash"></i>' +
+                      '</button>' +
+                    '</div>'
+                    
+                  }
+                  allComments+='</div>'
+                }
+
+
+            document.getElementById("comments").innerHTML = allComments
+            }
+        };
+        var data = JSON.stringify({ comment_id: id });
+        xhr.send(data);
+      }
+
+      </script>
+{% endblock %}

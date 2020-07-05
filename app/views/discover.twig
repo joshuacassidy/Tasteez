@@ -1,0 +1,29 @@
+{% set title = 'Discover' %}
+
+{% extends './templates/main.twig' %}
+
+{% block main %}
+{% include './partials/search-bar.twig' %}
+  <div class="grid">
+    <div class="grid__col grid__col--1-of-3">
+      <a href="/meals/categories" class="discovery_link">
+        <i class="fas fa-search fa-2x"></i>
+        <h3>Categories</h3>
+      </a>
+    </div>
+
+    <div class="grid__col grid__col--1-of-3">
+      <a href="/meals/most-popular" class="discovery_link">
+        <i class="fas fa-search fa-2x"></i>
+        <h3>Most Popular</h3>
+      </a>
+    </div>
+
+    <div class="grid__col grid__col--1-of-3">
+      <a href="/meals/recommended" class="discovery_link">
+        <i class="fas fa-search fa-2x"></i>
+        <h3>Recommended</h3>
+      </a>
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,32 @@
+.u-text-center {
+  text-align: center;
+}
+
+.u-display-inline-block {
+  display: inline-block;
+}
+
+.u-float-left {
+  float: left;
+}
+
+.u-float-right {
+  float: right;
+}
+
+.u-table {
+  display: table;
+
+  &-row {
+    display: table-row;
+  }
+
+  &-cell {
+    display: table-cell;
+    vertical-align: top;
+  }
+}
+
+.u-capitalize {
+  text-transform: capitalize;
+}

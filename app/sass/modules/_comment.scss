@@ -1,0 +1,97 @@
+.comment {
+  border: 1px solid #eee;
+  border-radius: 5px;
+  margin-bottom: 2em;
+  padding: 1em;
+  position: relative;
+
+  &__header {
+  padding-bottom: 1em;
+  }
+
+  &__body {
+    color: #576366;
+  }
+
+  &__username {
+    font-weight: bold;
+    margin-right: .5em;
+    color: #7b8b8e;
+    font-size: 1em;
+  }
+
+  &__icon {
+    display: inline-block;
+    width: auto;
+    box-sizing: content-box;
+    text-align: center;
+    transition: 0.3s;
+    color: white;
+    text-decoration: none;
+    font-size: .8em;
+    margin-right: 5px;
+
+    .fas {
+      width: 1.125em;
+      background-color: #F44336;
+      background-color: black;
+      border-radius: 60px;
+      box-shadow: 0px 0px 2px #888;
+      padding: 0.7em 0.6em;
+      &:hover {
+        box-shadow: 0px 0px 5px #888;
+      }
+    }
+
+
+  }
+
+  &__date {
+    color: #7b8b8e;
+    font-size: .8em;
+  }
+
+  &__button {
+    padding: 0;
+    margin: 0;
+    background-color: transparent;
+    border: none;
+    display: inline-block;
+    width: auto;
+    box-sizing: content-box;
+    text-align: center;
+    transition: 0.3s;
+    color: white;
+    text-decoration: none;
+    position: absolute;
+    right: 1em;
+    top: 1em;
+    font-size: .8em;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+    .fas {
+      width: 1.125em;
+      background-color: #F44336;
+      border-radius: 60px;
+      box-shadow: 0px 0px 2px #888;
+      padding: 0.7em 0.6em;
+      &:hover {
+        box-shadow: 0px 0px 5px #888;
+      }
+    }
+  }
+
+}
+
+.comment__icon--user {
+  .fas {
+    background-color: $sidebar-bg-color;
+  }
+}

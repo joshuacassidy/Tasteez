@@ -1,0 +1,24 @@
+.favourite {
+  display: inline-block;
+
+  &__button {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: white;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &__icon {
+    color: white;
+
+    &.isFavourite {
+      color: red;
+    }
+    
+  }
+
+}

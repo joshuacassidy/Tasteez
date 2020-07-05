@@ -1,0 +1,37 @@
+.meal {
+  background-color: white;
+  color: gray;
+  display: block;
+  border-radius: 5px;
+  position: relative;
+  overflow: hidden;
+
+  &:hover &__thumbnail {
+    transform: scale(1.03);
+    transform: scale3d(1.05, 1.05, 1.05);
+  }
+
+  &:hover &__footer {
+    background-color: darken($primary-color, 5%);
+  }
+
+  &__thumbnail {
+    transition: 0.3s;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+  }
+
+  &__footer {
+    font-size: 1.1em;
+    padding: 1em;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    background-color: $sidebar-bg-color;
+    color: white;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    transition: 0.3s;
+  }
+}

@@ -1,0 +1,33 @@
+.input {
+  color: white;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 1.6em;
+
+  &__input {
+    flex: 1;
+    padding: 1.1em;
+    border: none;
+    display: block;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border: none;
+
+    &:focus {
+      outline: 2px solid $primary-color;
+    }
+
+    &, &::placeholder {
+      color: #ccc;
+    }
+  }
+
+  &__icon {
+    padding: 1.1em 1.3em;
+    vertical-align: bottom;
+    background-color: $primary-color;
+    color: white;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+  }
+}

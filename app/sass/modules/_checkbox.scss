@@ -1,0 +1,19 @@
+.checkbox {
+  display: table;
+  &:hover {
+    cursor: pointer;
+  }
+
+  input:checked ~ p {
+    text-decoration: line-through;
+  }
+
+  p {
+    display: table-cell;
+  }
+
+  input {
+    display: table-cell;
+    margin-right: .5em;
+  }
+}

@@ -1,0 +1,14 @@
+.discovery_link {
+  display: block;
+  text-align: center;
+  background-color: $sidebar-bg-color;
+  color: white;
+  text-decoration: none;
+  padding: 6em 0;
+  transition: .3s;
+  border-radius: 5px;
+
+  &:hover {
+    background-color: $primary-color;
+  }
+}

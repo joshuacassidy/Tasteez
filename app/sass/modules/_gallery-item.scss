@@ -1,0 +1,12 @@
+.gallery-item {
+  background-color: white;
+  display: inline-block;
+  width: 31.3333%;
+  margin-bottom: 3%;
+  float: left;
+  margin-right: 3%;
+
+  &:nth-child(3n) {
+    margin-right: 0;
+  }
+}

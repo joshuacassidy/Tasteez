@@ -1,0 +1,12 @@
+{% set title = 'Favourites' %}
+
+{% extends './templates/main.twig' %}
+
+{% block main %}
+  <h2 class="title">Favourites</h2>
+  {% if meals|length > 0 %}
+    {% include './partials/meals.twig' with { 'meals' : meals}%}
+    {% else %}  
+    <p>You have not added any meals to your favourite list yet</p>
+  {% endif %}
+{% endblock %}

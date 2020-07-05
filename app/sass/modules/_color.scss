@@ -1,0 +1,40 @@
+@each $color, $value in $colors {
+
+  .#{$color}-bg {
+    background-color: $value;
+  }
+
+  .#{$color}-text {
+    color: $value;
+  }
+
+  .#{$color}-border {
+    border-color: $value;
+  }
+
+  .#{$color}-bg.#{$color}-bg--lighten {
+    background-color: lighten($value, 20%);
+  }
+
+  .#{$color}-bg.#{$color}-bg--darken {
+    background-color: darken($value, 20%);
+  }
+
+  .#{$color}-text.#{$color}-text--lighten {
+    background-color: lighten($value, 20%);
+  }
+
+  .#{$color}-text.#{$color}-text--darken {
+    background-color: darken($value, 20%);
+  }
+
+  .#{$color}-border.#{$color}-border--lighten {
+    background-color: lighten($value, 20%);
+  }
+
+  .#{$color}-border.#{$color}-border--darken {
+    background-color: darken($value, 20%);
+  }
+
+
+}

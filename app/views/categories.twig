@@ -1,0 +1,8 @@
+{% set title = 'Categories' %}
+
+{% extends './templates/main.twig' %}
+
+{% block main %}
+  <h2 class="title">Categories</h2>
+  {% include './partials/categories.twig' with {'categories': categories} %}
+{% endblock %}

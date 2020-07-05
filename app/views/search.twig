@@ -1,0 +1,11 @@
+{% set title = 'Search' %}
+
+{% extends './templates/main.twig' %}
+
+{% block main %}
+  {% include './partials/search-bar.twig' %}
+  {% if meals is defined %}
+    <h2 class="h4">Meals Found: {{ meals|length }}</h2>
+    {% include './partials/meals.twig' with {'meals': meals} %}
+  {% endif %}
+{% endblock %}

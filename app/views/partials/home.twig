@@ -1,0 +1,12 @@
+<ul class="media-list">
+{% for meal in meals|slice(0, 6)%}
+  <li class="media-list__item">
+    <a href="/meal/{{ meal.id }}" class="meal">
+      <img src="{{ meal.thumbnail }}" alt="Meal" class="meal__thumbnail">
+      <div class="meal__footer">
+        {{ meal.name }}
+      </div>
+    </a>
+  </li>
+{% endfor %}
+</ul>

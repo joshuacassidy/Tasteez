@@ -1,0 +1,44 @@
+.header {
+  background-color: white;
+  color: $primary-color;
+  line-height: $navbar-height;
+  padding: 0 2em;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 999;
+
+  a {
+    color: $primary-color;
+    text-decoration: none;
+    display: inline-block;
+    transition: .3s;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+
+  ul, li {
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+  }
+
+  span {
+    padding-left: 5px;
+  }
+
+  ul {
+    float: right;
+
+    & a {
+      font-weight: normal;
+      font-size: .9em;
+      padding-left: 1em;
+      text-transform: capitalize;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+  }
+}

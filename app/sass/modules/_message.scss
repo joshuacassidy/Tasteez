@@ -1,0 +1,23 @@
+.message {
+  padding: 1em;
+  margin-bottom: 1em;
+  font-weight: bold;
+  border-radius: 5px;
+
+  &__content {
+    margin: 0;
+    color: white;
+  }
+
+  &--error {
+    background: red;
+  }
+
+  &--success {
+    background: red;
+  }
+
+  &--error, &--success {
+    color: white;
+  }
+}

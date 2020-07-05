@@ -1,0 +1,58 @@
+{% set title = 'Register' %}
+
+{% extends './templates/nosidebar.twig' %}
+
+{% block main %}
+    <h2 class="title">Register</h2>
+    {% if errors is defined %}
+      {% for error in errors %}
+          <div class="message message--error">
+            <p class="message__content">{{ error }}</p>
+          </div>
+      {% endfor %}
+    {% endif %}
+
+    {% if registered %}
+    <div class="message message--success">
+      <p class="message__content">
+        Thank you for registering. <a href="/auth/login">Go to Login</a>.
+      </p>
+    </div>
+    {% endif %}
+
+    <form class="form" action="/auth/register" method="post">
+        <div class="input">
+          <span class="input__icon">
+            <i class="fas fa-user"></i>
+          </span>
+          <input placeholder="Username" class="input__input" type="text" name="username" value="" required>
+        </div>
+
+        <div class="input">
+          <span class="input__icon">
+            <i class="fas fa-envelope"></i>
+          </span>
+          <input placeholder="Email" class="input__input" type="email" name="email" value="" required>
+        </div>
+
+        <div class="input">
+          <span class="input__icon">
+            <i class="fas fa-lock"></i>
+          </span>
+          <input placeholder="Password" class="input__input" type="password" name="password" value="" required>
+        </div>
+
+        <div class="input">
+          <span class="input__icon">
+            <i class="fas fa-lock"></i>
+          </span>
+          <input placeholder="Confirm Password" class="input__input" type="password" name="confirm_password" value="" required>
+        </div>
+
+        <div class="checkbox">
+          <input type="checkbox" name="agreed" required>
+          <p>I agree to the <a href="/privacy-policy">terms and conditions</a> of this application.</p>
+        </div>
+        <button class="button" type="submit">Register</button>
+    </form>
+{% endblock %}

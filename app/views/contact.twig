@@ -1,0 +1,67 @@
+{% set title = 'Contact' %}
+
+{% extends './templates/nosidebar.twig' %}
+
+{% block main %}
+    <h2 class="title">Contact</h2>
+    <h4 id="emailResponse"></h4>
+
+    <div class="form" >
+        <div class="input">
+          <span class="input__icon">
+            <i class="fas fa-envelope"></i>
+          </span>
+          <input id="name" placeholder="Name" class="input__input" type="text" name="name" value="">
+        </div>
+
+        <div class="input">
+          <span class="input__icon">
+            <i class="fas fa-lock"></i>
+          </span>
+          <input id="email" placeholder="Email" class="input__input" type="text" name="email" value="">
+        </div>
+
+        <div class="input">
+          <textarea class="contact-textarea" id="message" name="message" placeholder="Leave a Message" rows="8" cols="80"></textarea>
+        </div>
+
+        <input class="button" type="button" name="" value="Submit" onclick="sendEmail()">
+    </div>
+
+    <script> 
+    function sendEmail() {
+      var name = document.getElementById("name");
+      var email = document.getElementById("email");
+      var message = document.getElementById("message");
+
+      var url = '/api/contact';
+      
+      var xhr = new XMLHttpRequest();
+      xhr.open("POST", url, true);
+      xhr.setRequestHeader("Content-Type", "application/json");
+      xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+            var res = JSON.parse(xhr.responseText);
+            console.log(res.message);
+            name.value = '';
+            email.value = '';
+            message.value = '';
+            document.getElementById("emailResponse").innerHTML = res.message;
+
+          } else if(xhr.status === 400) {
+            var res = JSON.parse(xhr.responseText);
+            document.getElementById("emailResponse").innerHTML = res.message;
+
+          }
+
+
+      };
+      var data = JSON.stringify({ name: name.value, email: email.value, message: message.value });
+      console.log(data)
+      xhr.send(data);
+
+    }
+
+    </script>
+
+{% endblock %}

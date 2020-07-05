@@ -1,0 +1,17 @@
+.directions {
+  margin-bottom: 2em;
+
+  li {
+    margin-bottom: 1em;
+  }
+
+  &__icon {
+    border-radius: 200px;
+    background-color: $primary-color;
+    padding: .5em 1em;
+    margin-right: 1em;
+    display: inline-block;
+    color: white;
+  }
+
+}

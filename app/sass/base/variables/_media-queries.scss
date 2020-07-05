@@ -1,0 +1,8 @@
+$mq-sm: "screen and (min-width: 350px)";
+$mq-md: "screen and (min-width: 700px)";
+$mq-lrg: "screen and (min-width: 1000px)";
+$mq: $mq-md;
+// Usage:
+// @media #{$mq-small} {
+//
+// }
